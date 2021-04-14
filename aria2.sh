@@ -14,11 +14,11 @@
 
 sh_ver="2.7.4"
 export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/sbin:/bin
-aria2_conf_dir="/root/.aria2c"
-download_path="/root/downloads"
+aria2_conf_dir="/home/aistudio/.aria2c"
+download_path="/home/aistudio/downloads"
 aria2_conf="${aria2_conf_dir}/aria2.conf"
 aria2_log="${aria2_conf_dir}/aria2.log"
-aria2c="/usr/local/bin/aria2c"
+aria2c="/home/aistudio/aria2c"
 Crontab_file="/usr/bin/crontab"
 Green_font_prefix="\033[32m"
 Red_font_prefix="\033[31m"
@@ -158,7 +158,7 @@ LICENSE
         }
     done
     sed -i "s@^\(dir=\).*@\1${download_path}@" ${aria2_conf}
-    sed -i "s@/root/.aria2/@${aria2_conf_dir}/@" ${aria2_conf_dir}/*.conf
+    sed -i "s@/home/aistudio/.aria2/@${aria2_conf_dir}/@" ${aria2_conf_dir}/*.conf
     sed -i "s@^\(rpc-secret=\).*@\1$(date +%s%N | md5sum | head -c 20)@" ${aria2_conf}
     sed -i "s@^#\(retry-on-.*=\).*@\1true@" ${aria2_conf}
     sed -i "s@^\(max-connection-per-server=\).*@\132@" ${aria2_conf}
@@ -204,7 +204,7 @@ Installation_dependency() {
     fi
 }
 Install_aria2() {
-    check_root
+    #check_root
     [[ -e ${aria2c} ]] && echo -e "${Error} Aria2 已安装，请检查 !" && exit 1
     check_sys
     echo -e "${Info} 开始安装/配置 依赖..."
